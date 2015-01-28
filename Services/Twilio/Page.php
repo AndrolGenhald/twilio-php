@@ -62,7 +62,7 @@ class Services_Twilio_Page
      */
     public function getIterator()
     {
-        return $this->getItems();
+        return new ArrayIterator($this->getItems());
     }
 }
 
