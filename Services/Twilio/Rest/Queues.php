@@ -1,7 +1,11 @@
 <?php
 
-class Services_Twilio_Rest_Queues
-    extends Services_Twilio_ListResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Queues
+    extends Twilio\ListResource
 {
     /**
      * Create a new Queue

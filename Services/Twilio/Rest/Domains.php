@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_Domains extends Services_Twilio_SIPListResource {
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Domains extends Twilio\SIPListResource {
 
     /**
      * Creates a new Domain instance

@@ -1,5 +1,9 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * A single Media object. For the definitive reference, see the `Twilio Media
  * Documentation <https://www.twilio.com/docs/api/rest/media>`_.
@@ -28,7 +32,7 @@
  *
  *    The content-type of the media.
  */
-class Services_Twilio_Rest_MediaInstance extends Services_Twilio_InstanceResource {
+class MediaInstance extends Twilio\InstanceResource {
     public function __construct($client, $uri) {
         $uri = str_replace('MediaInstance', 'Media', $uri);
         parent::__construct($client, $uri);

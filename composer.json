@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Services_Twilio": ""
+            "Services\Twilio": "Services\Twilio"
         }
     }
 }

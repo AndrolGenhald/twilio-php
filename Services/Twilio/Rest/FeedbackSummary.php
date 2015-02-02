@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_FeedbackSummary extends Services_Twilio_InstanceResource {
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class FeedbackSummary extends Twilio\InstanceResource {
 
     public function __construct($client, $uri, $params = array()) {
         $this->instance_name = "Services_Twilio_Rest_FeedbackSummary";

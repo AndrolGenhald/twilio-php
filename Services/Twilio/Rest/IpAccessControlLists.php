@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_IpAccessControlLists extends Services_Twilio_SIPListResource {
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class IpAccessControlLists extends Twilio\SIPListResource {
 
     /**
      * Creates a new IpAccessControlLists instance

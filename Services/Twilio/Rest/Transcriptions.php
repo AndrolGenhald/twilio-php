@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_Transcriptions
-    extends Services_Twilio_ListResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Transcriptions
+    extends Twilio\ListResource
 {
 }

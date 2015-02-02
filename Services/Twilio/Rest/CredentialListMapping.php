@@ -1,5 +1,9 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * A single CredentialListMapping
  *
@@ -28,7 +32,7 @@
  *    The subresources associated with this mapping (Credentials)
  */
 
-class Services_Twilio_Rest_CredentialListMapping extends Services_Twilio_InstanceResource {
+class CredentialListMapping extends Twilio\InstanceResource {
     protected function init($client, $uri) {
         $this->setupSubresources(
             'credentials'

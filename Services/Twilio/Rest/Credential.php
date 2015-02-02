@@ -1,5 +1,9 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * A single Credential
  *
@@ -27,4 +31,4 @@
  *
  *    The uri of this Credential object
  */
-class Services_Twilio_Rest_Credential extends Services_Twilio_InstanceResource { }
+class Credential extends Twilio\InstanceResource { }

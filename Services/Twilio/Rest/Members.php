@@ -1,7 +1,11 @@
 <?php
 
-class Services_Twilio_Rest_Members
-    extends Services_Twilio_ListResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Members
+    extends Twilio\ListResource
 {
     /**
      * Return the member at the front of the queue. Note that any operations 

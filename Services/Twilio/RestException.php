@@ -1,5 +1,7 @@
 <?php
 
+namespace Services\Twilio;
+
 /**
  * An exception talking to the Twilio API. This is thrown whenever the Twilio
  * API returns a 400 or 500-level exception.
@@ -9,7 +11,7 @@
  * :param int $code: a Twilio-specific error code for the exception
  * :param string $info: a link to more information
  */
-class Services_Twilio_RestException extends Exception {
+class RestException extends \Exception {
 
     /**
      * The HTTP status for the exception.

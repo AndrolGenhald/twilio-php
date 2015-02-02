@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_Tokens extends Services_Twilio_ListResource {
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Tokens extends Twilio\ListResource {
 
     /**
      * Create a new Token instance

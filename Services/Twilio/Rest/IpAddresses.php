@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_IpAddresses extends Services_Twilio_SIPListResource {
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class IpAddresses extends Twilio\SIPListResource {
 
     public function __construct($client, $uri) {
         $this->instance_name = "Services_Twilio_Rest_IpAddress";

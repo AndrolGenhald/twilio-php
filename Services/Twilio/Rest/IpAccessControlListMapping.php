@@ -1,5 +1,9 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * A single IpAccessControlListMapping
  *
@@ -27,7 +31,7 @@
  *
  *    The subresources associated with this mapping (IpAddresses)
  */
-class Services_Twilio_Rest_IpAccessControlListMapping extends Services_Twilio_InstanceResource {
+class IpAccessControlListMapping extends Twilio\InstanceResource {
     protected function init($client, $uri) {
         $this->setupSubresources(
             'ip_addresses'

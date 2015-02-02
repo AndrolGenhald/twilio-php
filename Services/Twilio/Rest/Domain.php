@@ -1,5 +1,9 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * A single Domain
  *
@@ -60,7 +64,7 @@
  *    The subresources associated with this domain (IpAccessControlListMappings, CredentialListMappings)
  *
  */
-class Services_Twilio_Rest_Domain extends Services_Twilio_InstanceResource {
+class Domain extends Twilio\InstanceResource {
     protected function init($client, $uri) {
         $this->setupSubresources(
             'ip_access_control_list_mappings',

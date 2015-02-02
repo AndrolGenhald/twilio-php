@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_Account extends Services_Twilio_InstanceResource {
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Account extends Twilio\InstanceResource {
 
     protected function init($client, $uri) {
         $this->setupSubresources(
@@ -28,7 +32,7 @@ class Services_Twilio_Rest_Account extends Services_Twilio_InstanceResource {
             'addresses'
         );
 
-        $this->sandbox = new Services_Twilio_Rest_Sandbox(
+        $this->sandbox = new Sandbox(
             $client, $uri . '/Sandbox'
         );
     }

@@ -1,3 +1,5 @@
 <?php
 
-class Services_Twilio_HttpException extends ErrorException {}
+namespace Services\Twilio;
+
+class HttpException extends \ErrorException {}

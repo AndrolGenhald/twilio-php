@@ -1,10 +1,14 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * For more information, see the `Account List Resource
  * <http://www.twilio.com/docs/api/rest/account#list>`_ documentation.
  */
-class Services_Twilio_Rest_Accounts extends Services_Twilio_ListResource {
+class Accounts extends Twilio\ListResource {
 
     /**
      * Create a new subaccount.

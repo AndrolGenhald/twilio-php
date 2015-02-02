@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_Application
-    extends Services_Twilio_InstanceResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Application
+    extends Twilio\InstanceResource
 {
 }

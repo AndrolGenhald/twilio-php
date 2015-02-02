@@ -1,12 +1,16 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * For more information, see the
  * `IncomingPhoneNumbers API Resource
  * <http://www.twilio.com/docs/api/rest/incoming-phone-numbers#local>`_
  * documentation at twilio.com.
  */
-class Services_Twilio_Rest_IncomingPhoneNumbers extends Services_Twilio_ListResource {
+class IncomingPhoneNumbers extends Twilio\ListResource {
     function init($client, $uri) {
         $this->setupSubresources(
             'local',
@@ -36,8 +40,8 @@ class Services_Twilio_Rest_IncomingPhoneNumbers extends Services_Twilio_ListReso
      *      echo $number->sid;
      *
      * :param string $number: The number in E.164 format, eg "+684105551234"
-     * :return:  A :php:class:`Services_Twilio_Rest_IncomingPhoneNumber` object, or null
-     * :raises: a A :php:class:`Services_Twilio_RestException` if the number is
+     * :return:  A :php:class:`IncomingPhoneNumber` object, or null
+     * :raises: a A :php:class:`Twilio\RestException` if the number is
      *      invalid, not provided in E.164 format or for any other API exception.
      */
     public function getNumber($number) {
@@ -52,8 +56,8 @@ class Services_Twilio_Rest_IncomingPhoneNumbers extends Services_Twilio_ListReso
     }
 }
 
-class Services_Twilio_Rest_Local extends Services_Twilio_NumberType { }
+class Local extends Twilio\NumberType { }
 
-class Services_Twilio_Rest_Mobile extends Services_Twilio_NumberType { }
+class Mobile extends Twilio\NumberType { }
 
-class Services_Twilio_Rest_TollFree extends Services_Twilio_NumberType { }
+class TollFree extends Twilio\NumberType { }

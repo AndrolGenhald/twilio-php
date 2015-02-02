@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_DependentPhoneNumbers
-    extends Services_Twilio_ListResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class DependentPhoneNumbers
+    extends Twilio\ListResource
 {
 }

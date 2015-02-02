@@ -1,5 +1,7 @@
 <?php
 
+namespace Services\Twilio;
+
 /**
  * Abstraction of a Twilio resource.
  *
@@ -9,7 +11,7 @@
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  * @link     http://pear.php.net/package/Services_Twilio
  */
-abstract class Services_Twilio_Resource {
+abstract class Resource {
     protected $subresources;
 
     public function __construct($client, $uri, $params = array())

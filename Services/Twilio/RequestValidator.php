@@ -1,6 +1,8 @@
 <?php
 
-class Services_Twilio_RequestValidator
+namespace Services\Twilio;
+
+class RequestValidator
 {
 
     protected $AuthToken;

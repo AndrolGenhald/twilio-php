@@ -1,7 +1,11 @@
 <?php
 
-class Services_Twilio_Rest_Calls
-    extends Services_Twilio_ListResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Calls
+    extends Twilio\ListResource
 {
 
     function init($client, $uri)
@@ -38,7 +42,7 @@ class Services_Twilio_Rest_Calls
      * @param $callSid
      * @param $qualityScore
      * @param array $issue
-     * @return Services_Twilio_Rest_Feedback
+     * @return Feedback
      */
     public function createFeedback($callSid, $qualityScore, array $issue = array())
     {
@@ -48,7 +52,7 @@ class Services_Twilio_Rest_Calls
         $feedbackUri = $this->uri . '/' . $callSid . '/Feedback';
 
         $response = $this->client->createData($feedbackUri, $params);
-        return new Services_Twilio_Rest_Feedback($this->client, $feedbackUri, $response);
+        return new Feedback($this->client, $feedbackUri, $response);
     }
 
     /**
@@ -66,12 +70,12 @@ class Services_Twilio_Rest_Calls
      * Get a feedback for a call.
      *
      * @param $callSid
-     * @return Services_Twilio_Rest_Feedback
+     * @return Feedback
      */
     public function getFeedback($callSid)
     {
         $feedbackUri = $this->uri . '/' . $callSid . '/Feedback';
         $response = $this->client->retrieveData($feedbackUri);
-        return new Services_Twilio_Rest_Feedback($this->client, $feedbackUri, $response);
+        return new Feedback($this->client, $feedbackUri, $response);
     }
 }

@@ -1,7 +1,11 @@
 <?php
 
-class Services_Twilio_Rest_Applications
-    extends Services_Twilio_ListResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Applications
+    extends Twilio\ListResource
 {
     public function create($name, array $params = array())
     {

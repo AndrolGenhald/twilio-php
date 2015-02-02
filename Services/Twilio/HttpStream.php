@@ -1,12 +1,15 @@
 <?php
+
+namespace Services\Twilio;
+
 /**
  * HTTP Stream version of the TinyHttp Client used to connect to Twilio
  * services.
  */
 
-class Services_Twilio_HttpStreamException extends ErrorException {}
+class HttpStreamException extends \ErrorException {}
 
-class Services_Twilio_HttpStream {
+class HttpStream {
 
     private $auth_header = null;
     private $uri = null;
@@ -62,13 +65,13 @@ class Services_Twilio_HttpStream {
         $result = file_get_contents($url, false, $ctx);
 
         if (false === $result) {
-            throw new Services_Twilio_HttpStreamException(
+            throw new HttpStreamException(
                 "Unable to connect to service");
         }
 
         $status_header = array_shift($http_response_header);
         if (1 !== preg_match('#HTTP/\d+\.\d+ (\d+)#', $status_header, $matches)) {
-            throw new Services_Twilio_HttpStreamException(
+            throw new HttpStreamException(
                 "Unable to detect the status code in the HTTP result.");
         }
 

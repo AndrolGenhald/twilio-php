@@ -1,7 +1,11 @@
 <?php
 
-class Services_Twilio_Rest_Recording
-    extends Services_Twilio_InstanceResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Recording
+    extends Twilio\InstanceResource
 {
     protected function init($client, $uri) {
         $this->setupSubresources('transcriptions');

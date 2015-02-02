@@ -1,10 +1,14 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * For Linux filename compatibility, this file needs to be named Sip.php, or
  * camelize() needs to be special cased in setupSubresources
  */
-class Services_Twilio_Rest_Sip extends Services_Twilio_InstanceResource {
+class Sip extends Twilio\InstanceResource {
     protected function init($client, $uri) {
         $this->setupSubresources(
             'domains',

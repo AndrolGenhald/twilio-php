@@ -1,10 +1,14 @@
 <?php
 
-class Services_Twilio_Rest_ConnectApps
-    extends Services_Twilio_ListResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class ConnectApps
+    extends Twilio\ListResource
 {
     public function create($name, array $params = array())
     {
-        throw new BadMethodCallException('Not allowed');
+        throw new \BadMethodCallException('Not allowed');
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+namespace Services\Twilio;
+
 /**
  * Twilio Capability Token generator
  *
@@ -8,7 +10,7 @@
  * @author Jeff Lindsay <jeff.lindsay@twilio.com>
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  */
-class Services_Twilio_Capability
+class Capability
 {
     public $accountSid;
     public $authToken;
@@ -43,12 +45,12 @@ class Services_Twilio_Capability
 
         // clientName must be a non-zero length alphanumeric string
         if (preg_match('/\W/', $clientName)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Only alphanumeric characters allowed in client name.');
         }
 
         if (strlen($clientName) == 0) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Client name must not be a zero length string.');
         }
 
@@ -160,7 +162,7 @@ class ScopeURI
     public static function parse($uri)
     {
         if (strpos($uri, 'scope:') !== 0) {
-            throw new UnexpectedValueException(
+            throw new \UnexpectedValueException(
                 'Not a scope URI according to scheme');
         }
 
@@ -174,7 +176,7 @@ class ScopeURI
         $parts = explode(':', $parts[0], 2);
 
         if (count($parts) != 3) {
-            throw new UnexpectedValueException(
+            throw new \UnexpectedValueException(
                 'Not enough parts for scope URI');
         }
 
@@ -205,24 +207,24 @@ class JWT
     {
         $tks = explode('.', $jwt);
         if (count($tks) != 3) {
-            throw new UnexpectedValueException('Wrong number of segments');
+            throw new \UnexpectedValueException('Wrong number of segments');
         }
         list($headb64, $payloadb64, $cryptob64) = $tks;
         if (null === ($header = JWT::jsonDecode(JWT::urlsafeB64Decode($headb64)))
         ) {
-            throw new UnexpectedValueException('Invalid segment encoding');
+            throw new \UnexpectedValueException('Invalid segment encoding');
         }
         if (null === $payload = JWT::jsonDecode(JWT::urlsafeB64Decode($payloadb64))
         ) {
-            throw new UnexpectedValueException('Invalid segment encoding');
+            throw new \UnexpectedValueException('Invalid segment encoding');
         }
         $sig = JWT::urlsafeB64Decode($cryptob64);
         if ($verify) {
             if (empty($header->alg)) {
-                throw new DomainException('Empty algorithm');
+                throw new \DomainException('Empty algorithm');
             }
             if ($sig != JWT::sign("$headb64.$payloadb64", $key, $header->alg)) {
-                throw new UnexpectedValueException('Signature verification failed');
+                throw new \UnexpectedValueException('Signature verification failed');
             }
         }
         return $payload;
@@ -265,7 +267,7 @@ class JWT
             'HS512' => 'sha512',
         );
         if (empty($methods[$method])) {
-            throw new DomainException('Algorithm not supported');
+            throw new \DomainException('Algorithm not supported');
         }
         return hash_hmac($methods[$method], $msg, $key, true);
     }
@@ -282,7 +284,7 @@ class JWT
             JWT::handleJsonError($errno);
         }
         else if ($obj === null && $input !== 'null') {
-            throw new DomainException('Null result with non-null input');
+            throw new \DomainException('Null result with non-null input');
         }
         return $obj;
     }
@@ -299,7 +301,7 @@ class JWT
             JWT::handleJsonError($errno);
         }
         else if ($json === 'null' && $input !== null) {
-            throw new DomainException('Null result with non-null input');
+            throw new \DomainException('Null result with non-null input');
         }
         return $json;
     }
@@ -338,7 +340,7 @@ class JWT
             JSON_ERROR_CTRL_CHAR => 'Unexpected control character found',
             JSON_ERROR_SYNTAX => 'Syntax error, malformed JSON'
         );
-        throw new DomainException(isset($messages[$errno])
+        throw new \DomainException(isset($messages[$errno])
             ? $messages[$errno]
             : 'Unknown JSON error: ' . $errno
         );

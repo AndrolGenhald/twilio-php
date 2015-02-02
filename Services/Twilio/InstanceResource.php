@@ -1,5 +1,7 @@
 <?php
 
+namespace Services\Twilio;
+
 /**
  * @category Services
  * @package  Services_Twilio
@@ -11,7 +13,7 @@
 /**
  * Abstraction of an instance resource from the Twilio API.
  */
-abstract class Services_Twilio_InstanceResource extends Services_Twilio_Resource {
+abstract class InstanceResource extends Resource {
 
     /**
      * Make a request to the API to update an instance resource

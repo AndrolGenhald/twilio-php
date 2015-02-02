@@ -1,7 +1,11 @@
 <?php
 
-class Services_Twilio_Rest_Address
-    extends Services_Twilio_InstanceResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Address
+    extends Twilio\InstanceResource
 {
     protected function init($client, $uri)
     {

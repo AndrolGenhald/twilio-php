@@ -1,5 +1,9 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  *   For more information, see the `Call Instance Resource <http://www.twilio.com/docs/api/rest/call#instance>`_ documentation.
  *
@@ -78,7 +82,7 @@
  *
  *      If this call was an incoming call from a phone number with Caller ID Lookup enabled, the caller's name. Empty otherwise.
  */
-class Services_Twilio_Rest_Call extends Services_Twilio_InstanceResource {
+class Call extends Twilio\InstanceResource {
 
     /**
      * Hang up the call

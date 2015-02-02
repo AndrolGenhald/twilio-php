@@ -1,9 +1,11 @@
 <?php
 
+namespace Services\Twilio;
+
 /**
  * Exception class for Services_Twilio_Twiml.
  */
-class Services_Twilio_TwimlException extends Exception {}
+class TwimlException extends \Exception {}
 
 /**
  * Twiml response generator.
@@ -11,7 +13,7 @@ class Services_Twilio_TwimlException extends Exception {}
  * Author:   Neuman Vong <neuman at ashmoremusic dot com>
  * License:  http://creativecommons.org/licenses/MIT/ MIT
  */
-class Services_Twilio_Twiml {
+class Twiml {
 
     protected $element;
 
@@ -26,14 +28,14 @@ class Services_Twilio_Twiml {
      */
     public function __construct($arg = null) {
         switch (true) {
-        case $arg instanceof SimpleXmlElement:
+        case $arg instanceof\ SimpleXmlElement:
             $this->element = $arg;
             break;
         case $arg === null:
-            $this->element = new SimpleXmlElement('<Response/>');
+            $this->element = new \SimpleXmlElement('<Response/>');
             break;
         case is_array($arg):
-            $this->element = new SimpleXmlElement('<Response/>');
+            $this->element = new \SimpleXmlElement('<Response/>');
             foreach ($arg as $name => $value) {
                 $this->element->addAttribute($name, $value);
             }

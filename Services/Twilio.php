@@ -1,12 +1,14 @@
 <?php
 
+namespace Services;
+
 /*
  * Author:   Neuman Vong neuman@twilio.com
  * License:  http://creativecommons.org/licenses/MIT/ MIT
  * Link:     https://twilio-php.readthedocs.org/en/latest/
  */
 
-function Services_Twilio_autoload($className) {
+function Twilio_autoload($className) {
     if (substr($className, 0, 15) != 'Services_Twilio') {
         return false;
     }
@@ -15,7 +17,7 @@ function Services_Twilio_autoload($className) {
     return include dirname(__FILE__) . "/$file.php";
 }
 
-spl_autoload_register('Services_Twilio_autoload');
+spl_autoload_register('Twilio\autoload');
 
 /**
  * Create a client to talk to the Twilio API.
@@ -26,7 +28,7 @@ spl_autoload_register('Services_Twilio_autoload');
  *      <https://www.twilio.com/user/account>`_
  * :param string               $version:  API version to use
  * :param $_http:    A HTTP client for making requests.
- * :type $_http: :php:class:`Services_Twilio_TinyHttp`
+ * :type $_http: :php:class:`Twilio\TinyHttp`
  * :param int                  $retryAttempts:
  *      Number of times to retry failed requests. Currently only idempotent
  *      requests (GET's and DELETE's) are retried.
@@ -39,7 +41,7 @@ spl_autoload_register('Services_Twilio_autoload');
  *      $client = new Services_Twilio('AC123', '456bef', null, null, 3);
  *      // Take some action with the client, etc.
  */
-class Services_Twilio extends Services_Twilio_Resource
+class Twilio extends Twilio\Resource
 {
     const USER_AGENT = 'twilio-php/3.12.8';
 
@@ -53,7 +55,7 @@ class Services_Twilio extends Services_Twilio_Resource
         $sid,
         $token,
         $version = null,
-        Services_Twilio_TinyHttp $_http = null,
+        Twilio\TinyHttp $_http = null,
         $retryAttempts = 1
     ) {
         $this->version = in_array($version, $this->versions) ?
@@ -61,10 +63,10 @@ class Services_Twilio extends Services_Twilio_Resource
 
         if (null === $_http) {
             if (!in_array('openssl', get_loaded_extensions())) {
-                throw new Services_Twilio_HttpException("The OpenSSL extension is required but not currently enabled. For more information, see http://php.net/manual/en/book.openssl.php");
+                throw new Twilio\HttpException("The OpenSSL extension is required but not currently enabled. For more information, see http://php.net/manual/en/book.openssl.php");
             }
             if (in_array('curl', get_loaded_extensions())) {
-                  $_http = new Services_Twilio_TinyHttp(
+                  $_http = new Twilio\TinyHttp(
                       "https://api.twilio.com",
                       array(
                           "curlopts" => array(
@@ -74,7 +76,7 @@ class Services_Twilio extends Services_Twilio_Resource
                       )
                   );
             } else {
-                $_http = new Services_Twilio_HttpStream(
+                $_http = new Twilio\HttpStream(
                     "https://api.twilio.com",
                     array(
                         "http_options" => array(
@@ -93,7 +95,7 @@ class Services_Twilio extends Services_Twilio_Resource
         }
         $_http->authenticate($sid, $token);
         $this->http = $_http;
-        $this->accounts = new Services_Twilio_Rest_Accounts($this, "/{$this->version}/Accounts");
+        $this->accounts = new Twilio\Rest\Accounts($this, "/{$this->version}/Accounts");
         $this->account = $this->accounts->get($sid);
         $this->retryAttempts = $retryAttempts;
     }
@@ -279,7 +281,7 @@ class Services_Twilio extends Services_Twilio_Resource
      *
      * :return: PHP object decoded from JSON
      * :rtype: object
-     * :throws: A :php:class:`Services_Twilio_RestException` if the Response is
+     * :throws: A :php:class:`Twilio\RestException` if the Response is
      *      in the 300-500 range of status codes.
      */
     private function _processResponse($response)
@@ -290,7 +292,7 @@ class Services_Twilio extends Services_Twilio_Resource
         }
         $decoded = json_decode($body);
         if ($decoded === null) {
-            throw new Services_Twilio_RestException(
+            throw new Twilio\RestException(
                 $status,
                 'Could not decode response body as JSON. ' .
                 'This likely indicates a 500 server error'
@@ -300,7 +302,7 @@ class Services_Twilio extends Services_Twilio_Resource
             $this->last_response = $decoded;
             return $decoded;
         }
-        throw new Services_Twilio_RestException(
+        throw new Twilio\RestException(
             $status,
             isset($decoded->message) ? $decoded->message : '',
             isset($decoded->code) ? $decoded->code : null,

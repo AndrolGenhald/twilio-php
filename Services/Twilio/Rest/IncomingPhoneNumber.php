@@ -1,5 +1,9 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  *   An object representing a single phone number. For more
  *   information, see the `IncomingPhoneNumber Instance Resource
@@ -85,7 +89,7 @@
  *
  *    The URI for this resource, relative to https://api.twilio.com.
  */
-class Services_Twilio_Rest_IncomingPhoneNumber
-    extends Services_Twilio_InstanceResource
+class IncomingPhoneNumber
+    extends Twilio\InstanceResource
 {
 }

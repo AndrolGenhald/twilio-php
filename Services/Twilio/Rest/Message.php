@@ -1,5 +1,7 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
 /**
  * A single Message
  *
@@ -43,7 +45,7 @@
  *
  *    The phone number this message was sent to
  */
-class Services_Twilio_Rest_Message extends Services_Twilio_InstanceResource {
+class Message extends Twilio\InstanceResource {
     protected function init($client, $uri) {
         $this->setupSubresources(
             'media'

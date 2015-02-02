@@ -1,12 +1,14 @@
 <?php
 
+namespace Services\Twilio;
+
 /** 
  * Parent class for all UsageRecord subclasses
  * @author Kevin Burke <kevin@twilio.com>
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  * @link     http://pear.php.net/package/Services_Twilio
  */
-class Services_Twilio_UsageResource extends Services_Twilio_ListResource {
+class UsageResource extends ListResource {
     public function getResourceName($camelized = false) {
         $this->instance_name = 'Services_Twilio_Rest_UsageRecord';
         return $camelized ? 'UsageRecords' : 'usage_records';

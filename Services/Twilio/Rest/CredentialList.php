@@ -1,5 +1,9 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * A single CredentialList
  *
@@ -32,7 +36,7 @@
  *    The subresources associated with this credential list (Credentials)
  */
 
-class Services_Twilio_Rest_CredentialList extends Services_Twilio_InstanceResource {
+class CredentialList extends Twilio\InstanceResource {
     protected function init($client, $uri) {
         $this->setupSubresources(
             'credentials'

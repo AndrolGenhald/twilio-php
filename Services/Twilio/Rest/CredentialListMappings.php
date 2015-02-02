@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_CredentialListMappings extends Services_Twilio_SIPListResource {
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class CredentialListMappings extends Twilio\SIPListResource {
 
     /**
      * Creates a new CredentialListMapping instance

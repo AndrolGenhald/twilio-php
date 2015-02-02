@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_UsageTriggers extends Services_Twilio_ListResource {
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class UsageTriggers extends Twilio\ListResource {
 
     public function __construct($client, $uri) {
         $uri = preg_replace("#UsageTriggers#", "Usage/Triggers", $uri);

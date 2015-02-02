@@ -1,7 +1,9 @@
 <?php
 
-class Services_Twilio_AutoPagingIterator
-    implements Iterator
+namespace Services\Twilio;
+
+class AutoPagingIterator
+    implements \Iterator
 {
     protected $generator;
     protected $args;
@@ -44,7 +46,7 @@ class Services_Twilio_AutoPagingIterator
             $this->loadIfNecessary();
             return next($this->items);
         }
-        catch (Services_Twilio_RestException $e) {
+        catch (RestException $e) {
             // 20006 is an out of range paging error, everything else is valid
             if ($e->getCode() != 20006) {
                 throw $e;
@@ -67,7 +69,7 @@ class Services_Twilio_AutoPagingIterator
 
     public function count()
     {
-        throw new BadMethodCallException('Not allowed');
+        throw new \BadMethodCallException('Not allowed');
     }
 
     public function valid()
@@ -76,7 +78,7 @@ class Services_Twilio_AutoPagingIterator
             $this->loadIfNecessary();
             return key($this->items) !== null;
         }
-        catch (Services_Twilio_RestException $e) {
+        catch (RestException $e) {
             // 20006 is an out of range paging error, everything else is valid
             if ($e->getCode() != 20006) {
                 throw $e;

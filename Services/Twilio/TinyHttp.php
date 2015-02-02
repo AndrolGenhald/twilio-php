@@ -1,10 +1,12 @@
 <?php
+
+namespace Services\Twilio;
 /**
  * Based on TinyHttp from https://gist.github.com/618157.
  * Copyright 2011, Neuman Vong. BSD License.
  */
 
-class Services_Twilio_TinyHttpException extends ErrorException {}
+class TinyHttpException extends \ErrorException {}
 
 /**
  * An HTTP client that makes requests
@@ -30,7 +32,7 @@ class Services_Twilio_TinyHttpException extends ErrorException {}
  *         ))
  *     );
  */
-class Services_Twilio_TinyHttp {
+class TinyHttp {
   var $user, $pass, $scheme, $host, $port, $debug, $curlopts;
 
   public function __construct($uri = '', $kwargs = array()) {
@@ -71,7 +73,7 @@ class Services_Twilio_TinyHttp {
           fseek($buf, 0);
           $opts[CURLOPT_INFILE] = $buf;
           $opts[CURLOPT_INFILESIZE] = strlen($req_body);
-        } else throw new Services_Twilio_TinyHttpException('unable to open temporary file');
+        } else throw new TinyHttpException('unable to open temporary file');
       }
       break;
     case 'head':
@@ -112,11 +114,11 @@ class Services_Twilio_TinyHttp {
             }
             return array($status, $headers, $body);
           } else {
-              throw new Services_Twilio_TinyHttpException(curl_error($curl));
+              throw new TinyHttpException(curl_error($curl));
           }
-        } else throw new Services_Twilio_TinyHttpException(curl_error($curl));
-      } else throw new Services_Twilio_TinyHttpException('unable to initialize cURL');
-    } catch (ErrorException $e) {
+        } else throw new TinyHttpException(curl_error($curl));
+      } else throw new TinyHttpException('unable to initialize cURL');
+    } catch (\ErrorException $e) {
       if (is_resource($curl)) curl_close($curl);
       if (isset($buf) && is_resource($buf)) fclose($buf);
       throw $e;

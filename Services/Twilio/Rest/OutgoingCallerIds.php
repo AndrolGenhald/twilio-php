@@ -1,7 +1,11 @@
 <?php
 
-class Services_Twilio_Rest_OutgoingCallerIds
-    extends Services_Twilio_ListResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class OutgoingCallerIds
+    extends Twilio\ListResource
 {
     public function create($phoneNumber, array $params = array())
     {

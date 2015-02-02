@@ -1,5 +1,7 @@
 <?php
 
+namespace Services\Twilio;
+
 /**
  * Helper class to wrap an object with a modified interface created by
  * a partial application of its existing methods.
@@ -10,7 +12,7 @@
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  * @link     http://pear.php.net/package/Services_Twilio
  */ 
-class Services_Twilio_PartialApplicationHelper
+class PartialApplicationHelper
 {
     private $callbacks;
 
@@ -30,7 +32,7 @@ class Services_Twilio_PartialApplicationHelper
     public function __call($method, $args)
     {
         if (!isset($this->callbacks[$method])) {
-            throw new Exception("Method not found: $method");
+            throw new \Exception("Method not found: $method");
         }
         list($callback, $cb_args) = $this->callbacks[$method];
         return call_user_func_array(

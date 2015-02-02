@@ -1,5 +1,9 @@
 <?php
 
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
 /**
  * A single IpAddress
  *
@@ -31,4 +35,4 @@
  *
  *    The uri of this IpAddress object
  */
-class Services_Twilio_Rest_IpAddress extends Services_Twilio_InstanceResource { }
+class IpAddress extends Twilio\InstanceResource { }

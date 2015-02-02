@@ -1,7 +1,11 @@
 <?php
 
-class Services_Twilio_Rest_Participant
-    extends Services_Twilio_InstanceResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Participant
+    extends Twilio\InstanceResource
 {
     public function mute()
     {

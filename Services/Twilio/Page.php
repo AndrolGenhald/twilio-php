@@ -1,5 +1,7 @@
 <?php
 
+namespace Services\Twilio;
+
 /**
  * A representation of a page of resources.
  *
@@ -9,8 +11,8 @@
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  * @link     http://pear.php.net/package/Services_Twilio
  */ 
-class Services_Twilio_Page
-    implements IteratorAggregate
+class Page
+    implements \IteratorAggregate
 {
 
     /**
@@ -58,11 +60,11 @@ class Services_Twilio_Page
     /**
      * Implementation of IteratorAggregate::getIterator().
      *
-     * @return Traversable
+     * @return \Traversable
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->getItems());
+        return new \ArrayIterator($this->getItems());
     }
 }
 

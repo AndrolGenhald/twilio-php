@@ -1,6 +1,10 @@
 <?php
 
-class Services_Twilio_Rest_Credentials extends Services_Twilio_SIPListResource {
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class Credentials extends Twilio\SIPListResource {
 
     /**
      * Creates a new Credential instance

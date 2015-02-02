@@ -1,6 +1,8 @@
 <?php
 
-class Services_Twilio_Rest_Messages extends Services_Twilio_ListResource {
+namespace Services\Twilio\Rest;
+
+class Messages extends Twilio\ListResource {
 
     /**
      * Create a new Message instance

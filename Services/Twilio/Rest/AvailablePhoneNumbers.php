@@ -1,10 +1,14 @@
 <?php
 
-class Services_Twilio_Rest_AvailablePhoneNumbers
-    extends Services_Twilio_ListResource
+namespace Services\Twilio\Rest;
+
+use Services\Twilio;
+
+class AvailablePhoneNumbers
+    extends Twilio\ListResource
 {
     public function getLocal($country) {
-        $curried = new Services_Twilio_PartialApplicationHelper();
+        $curried = new Twilio\PartialApplicationHelper();
         $curried->set(
             'getList',
             array($this, 'getList'),
@@ -13,7 +17,7 @@ class Services_Twilio_Rest_AvailablePhoneNumbers
         return $curried;
     }
     public function getTollFree($country) {
-        $curried = new Services_Twilio_PartialApplicationHelper();
+        $curried = new Twilio\PartialApplicationHelper();
         $curried->set(
             'getList',
             array($this, 'getList'),
@@ -24,7 +28,7 @@ class Services_Twilio_Rest_AvailablePhoneNumbers
 
     public function getMobile($country)
     {
-        $curried = new Services_Twilio_PartialApplicationHelper();
+        $curried = new Twilio\PartialApplicationHelper();
         $curried->set(
             'getList',
             array($this, 'getList'),
@@ -48,7 +52,7 @@ class Services_Twilio_Rest_AvailablePhoneNumbers
 
     public function getResourceName($camelized = false) {
         // You can't page through the list of available phone numbers.
-        $this->instance_name = 'Services_Twilio_Rest_AvailablePhoneNumber';
+        $this->instance_name = 'AvailablePhoneNumber'; //TODO Namespaces - make sure this works
         return $camelized ? 'Countries' : 'countries';
     }
 }

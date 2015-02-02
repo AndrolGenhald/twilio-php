@@ -1,5 +1,7 @@
 <?php
 
+namespace Services\Twilio;
+
 /**
  * @author   Neuman Vong neuman@twilio.com
  * @license  http://creativecommons.org/licenses/MIT/ MIT
@@ -14,8 +16,8 @@
  * <http://php.net/manual/en/class.countable.php>`_ interfaces.
  *
  */
-abstract class Services_Twilio_ListResource extends Services_Twilio_Resource
-    implements IteratorAggregate, Countable
+abstract class ListResource extends Resource
+    implements \IteratorAggregate, \Countable
 {
 
     public function __construct($client, $uri) {
@@ -135,7 +137,7 @@ abstract class Services_Twilio_ListResource extends Services_Twilio_Resource
         } else {
             $next_page_uri = null;
         }
-        return new Services_Twilio_Page($page, $list_name, $next_page_uri);
+        return new Twilio\Page($page, $list_name, $next_page_uri);
     }
 
     /**
@@ -153,7 +155,7 @@ abstract class Services_Twilio_ListResource extends Services_Twilio_Resource
         try {
             $page = $this->getPage(0, 1);
             return $page ? (int)$page->total : 0;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return 0;
         }
     }
@@ -184,7 +186,7 @@ abstract class Services_Twilio_ListResource extends Services_Twilio_Resource
     public function getIterator(
         $page = 0, $size = 50, $filters = array()
     ) {
-        return new Services_Twilio_AutoPagingIterator(
+        return new AutoPagingIterator(
             array($this, 'getPageGenerator'), $page, $size, $filters
         );
     }

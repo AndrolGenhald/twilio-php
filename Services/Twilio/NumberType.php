@@ -1,6 +1,8 @@
 <?php
 
-class Services_Twilio_NumberType extends Services_Twilio_ListResource
+namespace Services\Twilio;
+
+class NumberType extends ListResource
 {
     public function getResourceName($camelized = false) {
         $this->instance_name = 'Services_Twilio_Rest_IncomingPhoneNumber';
