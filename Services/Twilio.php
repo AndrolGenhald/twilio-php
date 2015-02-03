@@ -9,7 +9,7 @@ namespace Services;
  */
 
 function Twilio_autoload($className) {
-    if (substr($className, 0, 15) != 'Services_Twilio') {
+    if (substr($className, 0, 15) != 'Services\\Twilio') {
         return false;
     }
     $file = str_replace('_', '/', $className);
@@ -17,7 +17,7 @@ function Twilio_autoload($className) {
     return include dirname(__FILE__) . "/$file.php";
 }
 
-spl_autoload_register('Twilio\autoload');
+spl_autoload_register('Twilio_autoload');
 
 /**
  * Create a client to talk to the Twilio API.
