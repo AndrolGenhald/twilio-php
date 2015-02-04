@@ -2,6 +2,8 @@
 
 namespace Services\Twilio\Rest;
 
+use Services\Twilio;
+
 /**
  * A single Message
  *

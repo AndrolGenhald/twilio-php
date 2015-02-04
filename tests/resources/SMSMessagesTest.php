@@ -20,7 +20,7 @@ class SMSMessagesTest extends PHPUnit_Framework_TestCase {
     }
 
     function testBadMessageThrowsException() {
-        $this->setExpectedException('Twilio\RestException');
+        $this->setExpectedException('Services\\Twilio\\RestException');
         $http = m::mock(new Twilio\TinyHttp);
         $http->shouldReceive('post')->once()
             ->with('/2010-04-01/Accounts/AC123/SMS/Messages.json', $this->formHeaders,
