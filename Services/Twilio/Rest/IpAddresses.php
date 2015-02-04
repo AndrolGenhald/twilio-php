@@ -7,7 +7,7 @@ use Services\Twilio;
 class IpAddresses extends Twilio\SIPListResource {
 
     public function __construct($client, $uri) {
-        $this->instance_name = "Services_Twilio_Rest_IpAddress";
+        $this->instance_name = "Services\\Twilio\\Rest\\IpAddress";
         parent::__construct($client, $uri);
     }
 

@@ -1,10 +1,11 @@
 <?php
 
+use Services\Twilio;
 use \Mockery as m;
 
 class UsageTriggersTest extends PHPUnit_Framework_TestCase {
     function testRetrieveTrigger() {
-        $http = m::mock(new Services_Twilio_TinyHttp);
+        $http = m::mock(new Twilio\TinyHttp);
         $http->shouldReceive('get')->once()
             ->with('/2010-04-01/Accounts/AC123/Usage/Triggers/UT123.json')
             ->andReturn(array(200, array('Content-Type' => 'application/json'),
@@ -15,7 +16,7 @@ class UsageTriggersTest extends PHPUnit_Framework_TestCase {
                     'usage_category' => 'totalprice',
                 ))
             ));
-        $client = new Services_Twilio('AC123', '456bef', '2010-04-01', $http);
+        $client = new Twilio('AC123', '456bef', '2010-04-01', $http);
         $usageSid = 'UT123';
         $usageTrigger = $client->account->usage_triggers->get($usageSid);
         $this->assertSame('totalprice', $usageTrigger->usage_category);
@@ -24,7 +25,7 @@ class UsageTriggersTest extends PHPUnit_Framework_TestCase {
     protected $formHeaders = array('Content-Type' => 'application/x-www-form-urlencoded');
 
     function testUpdateTrigger() {
-        $http = m::mock(new Services_Twilio_TinyHttp);
+        $http = m::mock(new Twilio\TinyHttp);
         $usageSid = 'UT123';
         $http->shouldReceive('post')->once()
             ->with('/2010-04-01/Accounts/AC123/Usage/Triggers/UT123.json',
@@ -44,7 +45,7 @@ class UsageTriggersTest extends PHPUnit_Framework_TestCase {
                     'friendly_name' => 'new',
                 ))
             ));
-        $client = new Services_Twilio('AC123', '456bef', '2010-04-01', $http);
+        $client = new Twilio('AC123', '456bef', '2010-04-01', $http);
         $usageTrigger = $client->account->usage_triggers->get($usageSid);
         $usageTrigger->update(array(
             'FriendlyName' => 'new',
@@ -54,7 +55,7 @@ class UsageTriggersTest extends PHPUnit_Framework_TestCase {
     }
 
     function testFilterTriggerList() {
-        $http = m::mock(new Services_Twilio_TinyHttp);
+        $http = m::mock(new Twilio\TinyHttp);
         $params = 'Page=0&PageSize=50&UsageCategory=sms';
         $http->shouldReceive('get')->once()
             ->with('/2010-04-01/Accounts/AC123/Usage/Triggers.json?' . $params)
@@ -79,7 +80,7 @@ class UsageTriggersTest extends PHPUnit_Framework_TestCase {
             ->andReturn(array(400, array('Content-Type' => 'application/json'),
                 '{"status":400,"message":"foo", "code": "20006"}'
             ));
-        $client = new Services_Twilio('AC123', '456bef', '2010-04-01', $http);
+        $client = new Twilio('AC123', '456bef', '2010-04-01', $http);
         foreach ($client->account->usage_triggers->getIterator(
             0, 50, array(
                 'UsageCategory' => 'sms',
@@ -90,7 +91,7 @@ class UsageTriggersTest extends PHPUnit_Framework_TestCase {
     }
 
     function testCreateTrigger() {
-        $http = m::mock(new Services_Twilio_TinyHttp);
+        $http = m::mock(new Twilio\TinyHttp);
         $params = 'UsageCategory=sms&TriggerValue=100&CallbackUrl=foo';
         $http->shouldReceive('post')->once()
             ->with('/2010-04-01/Accounts/AC123/Usage/Triggers.json',
@@ -102,7 +103,7 @@ class UsageTriggersTest extends PHPUnit_Framework_TestCase {
                     'uri' => '/2010-04-01/Accounts/AC123/Usage/Triggers/UT123.json'
                 ))
             ));
-        $client = new Services_Twilio('AC123', '456bef', '2010-04-01', $http);
+        $client = new Twilio('AC123', '456bef', '2010-04-01', $http);
         $trigger = $client->account->usage_triggers->create(
             'sms',
             '100',

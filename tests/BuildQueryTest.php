@@ -2,6 +2,8 @@
 
 require_once 'Twilio.php';
 
+use Services\Twilio;
+
 class BuildQueryTest extends PHPUnit_Framework_TestCase {
 
     public function testSimpleQueryString() {
@@ -10,7 +12,7 @@ class BuildQueryTest extends PHPUnit_Framework_TestCase {
             'baz' => 'bin',
         );
 
-        $this->assertEquals(Services_Twilio::buildQuery($data), 'foo=bar&baz=bin');
+        $this->assertEquals(Twilio::buildQuery($data), 'foo=bar&baz=bin');
     }
 
     public function testSameKey() {
@@ -23,7 +25,7 @@ class BuildQueryTest extends PHPUnit_Framework_TestCase {
             'boo' => 'bah',
         );
 
-        $this->assertEquals(Services_Twilio::buildQuery($data),
+        $this->assertEquals(Twilio::buildQuery($data),
             'foo=bar&foo=baz&foo=bin&boo=bah');
     }
 
@@ -34,7 +36,7 @@ class BuildQueryTest extends PHPUnit_Framework_TestCase {
             'bin',
         );
 
-        $this->assertEquals(Services_Twilio::buildQuery($data), '0=bar&1=baz&2=bin');
+        $this->assertEquals(Twilio::buildQuery($data), '0=bar&1=baz&2=bin');
     }
 
     public function testKeylessDataPrefix() {
@@ -44,12 +46,12 @@ class BuildQueryTest extends PHPUnit_Framework_TestCase {
             'bin',
         );
 
-        $this->assertEquals(Services_Twilio::buildQuery($data, 'var'), 'var0=bar&var1=baz&var2=bin');
+        $this->assertEquals(Twilio::buildQuery($data, 'var'), 'var0=bar&var1=baz&var2=bin');
     }
 
     public function testQualifiedUserAgent() {
-        $expected = Services_Twilio::USER_AGENT . " (php 5.4)";
-        $this->assertEquals(Services_Twilio::qualifiedUserAgent("5.4"), $expected);
+        $expected = Twilio::USER_AGENT . " (php 5.4)";
+        $this->assertEquals(Twilio::qualifiedUserAgent("5.4"), $expected);
     }
 
 }

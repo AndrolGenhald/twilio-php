@@ -10,7 +10,7 @@ namespace Services\Twilio;
  */
 class UsageResource extends ListResource {
     public function getResourceName($camelized = false) {
-        $this->instance_name = 'Services_Twilio_Rest_UsageRecord';
+        $this->instance_name = 'Services\\Twilio\\Rest\\UsageRecord';
         return $camelized ? 'UsageRecords' : 'usage_records';
     }
 

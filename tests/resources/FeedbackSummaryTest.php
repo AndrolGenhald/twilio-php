@@ -1,5 +1,6 @@
 <?php
 
+use Services\Twilio;
 use \Mockery as m;
 
 class FeedbackSummaryTest extends PHPUnit_Framework_TestCase
@@ -11,7 +12,7 @@ class FeedbackSummaryTest extends PHPUnit_Framework_TestCase
 
     function testCreateFeedbackSummary()
     {
-        $http = m::mock(new Services_Twilio_TinyHttp);
+        $http = m::mock(new Twilio\TinyHttp);
         $http->shouldReceive('post')->once()
             ->with('/2010-04-01/Accounts/' . self::$accountSid . '/Calls/FeedbackSummary.json', self::$formHeaders,
                 'StartDate=2014-01-01&EndDate=2014-01-31&IncludeSubaccounts=1&StatusCallback=http%3A%2F%2Fwww.example.com%2Ffeedback')
@@ -33,7 +34,7 @@ class FeedbackSummaryTest extends PHPUnit_Framework_TestCase
                     'date_updated' => 'Thu, 19 Aug 2010 00:25:48 +0000'
                 ))
             ));
-        $client = new Services_Twilio(self::$accountSid, self::$authToken, '2010-04-01', $http);
+        $client = new Twilio(self::$accountSid, self::$authToken, '2010-04-01', $http);
         $feedbackSummary = $client->account->calls->feedback_summary->create(array('StartDate' => '2014-01-01',
             'EndDate' => '2014-01-31',
             'IncludeSubaccounts' => true,
@@ -46,18 +47,18 @@ class FeedbackSummaryTest extends PHPUnit_Framework_TestCase
 
     function testDeleteFeedbackSummary()
     {
-        $http = m::mock(new Services_Twilio_TinyHttp);
+        $http = m::mock(new Twilio\TinyHttp);
         $http->shouldReceive('delete')->once()
             ->with('/2010-04-01/Accounts/' . self::$accountSid . '/Calls/FeedbackSummary/'. self::$feedbackSummarySid .'.json')
             ->andReturn(array(204, array('Content-Type' => 'application/json'), ''));
-        $client = new Services_Twilio(self::$accountSid, self::$authToken, '2010-04-01', $http);
+        $client = new Twilio(self::$accountSid, self::$authToken, '2010-04-01', $http);
         $feedbackSummary = $client->account->calls->feedback_summary->delete(self::$feedbackSummarySid);
         $this->assertNull($feedbackSummary);
     }
 
     function testGetFeedbackSummary()
     {
-        $http = m::mock(new Services_Twilio_TinyHttp);
+        $http = m::mock(new Twilio\TinyHttp);
         $http->shouldReceive('get')->once()
             ->with('/2010-04-01/Accounts/' . self::$accountSid . '/Calls/FeedbackSummary/' . self::$feedbackSummarySid . '.json')
             ->andReturn(array(200, array('Content-Type' => 'application/json'),
@@ -78,7 +79,7 @@ class FeedbackSummaryTest extends PHPUnit_Framework_TestCase
                     'date_updated' => 'Thu, 19 Aug 2010 00:25:48 +0000'
                 ))
             ));
-        $client = new Services_Twilio(self::$accountSid, self::$authToken, '2010-04-01', $http);
+        $client = new Twilio(self::$accountSid, self::$authToken, '2010-04-01', $http);
         $feedbackSummary = $client->account->calls->feedback_summary->get(self::$feedbackSummarySid);
         $this->assertEquals(self::$feedbackSummarySid, $feedbackSummary->sid);
         $this->assertEquals('2014-01-01', $feedbackSummary->start_date);

@@ -45,7 +45,7 @@ abstract class Resource {
     {
         foreach (func_get_args() as $name) {
             $constantized = ucfirst(self::camelize($name));
-            $type = "Services_Twilio_Rest_" . $constantized;
+            $type = "Services\\Twilio\\Rest\\" . $constantized;
             $this->subresources[$name] = new $type(
                 $this->client, $this->uri . "/$constantized"
             );
@@ -55,14 +55,14 @@ abstract class Resource {
     /*
      * Get the resource name from the classname
      *
-     * Ex: Services_Twilio_Rest_Accounts -> Accounts
+     * Ex: Services\Twilio\Rest\Accounts -> Accounts
      *
      * @param boolean $camelized Whether to return camel case or not
      */
     public function getResourceName($camelized = false)
     {
         $name = get_class($this);
-        $parts = explode('_', $name);
+        $parts = explode('\\', $name);
         $basename = end($parts);
         if ($camelized) {
             return $basename;

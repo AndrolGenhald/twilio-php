@@ -1,11 +1,12 @@
 <?php
 
+use Services\Twilio;
 use \Mockery as m;
 
 class ConnectAppsTest extends PHPUnit_Framework_TestCase {
 
     function testUpdateWithArray() {
-        $http = m::mock(new Services_Twilio_TinyHttp);
+        $http = m::mock(new Twilio\TinyHttp);
         $http->shouldReceive('get')->once()
             ->with('/2010-04-01/Accounts/AC123/ConnectApps/CN123.json')
             ->andReturn(array(200, array('Content-Type' => 'application/json'),
@@ -18,7 +19,7 @@ class ConnectAppsTest extends PHPUnit_Framework_TestCase {
             ->andReturn(array(200, array('Content-Type' => 'application/json'),
                 json_encode(array('friendly_name' => 'Bar'))
             ));
-        $client = new Services_Twilio('AC123', '123', '2010-04-01', $http);
+        $client = new Twilio('AC123', '123', '2010-04-01', $http);
         $cn = $client->account->connect_apps->get('CN123');
         $this->assertEquals('foo', $cn->friendly_name);
         $cn->update(array('FriendlyName' => 'Bar'));
@@ -27,7 +28,7 @@ class ConnectAppsTest extends PHPUnit_Framework_TestCase {
 
     function testUpdateWithOneParam()
     {
-        $http = m::mock(new Services_Twilio_TinyHttp);
+        $http = m::mock(new Twilio\TinyHttp);
         $http->shouldReceive('get')->once()
             ->with('/2010-04-01/Accounts/AC123/ConnectApps/CN123.json')
             ->andReturn(array(200, array('Content-Type' => 'application/json'),
@@ -40,7 +41,7 @@ class ConnectAppsTest extends PHPUnit_Framework_TestCase {
             ->andReturn(array(200, array('Content-Type' => 'application/json'),
                 json_encode(array('friendly_name' => 'Bar'))
             ));
-        $client = new Services_Twilio('AC123', '123', '2010-04-01', $http);
+        $client = new Twilio('AC123', '123', '2010-04-01', $http);
         $cn = $client->account->connect_apps->get('CN123');
         $this->assertEquals('foo', $cn->friendly_name);
         $cn->update('FriendlyName', 'Bar');

@@ -2,12 +2,14 @@
 
 namespace Services\Twilio\Rest;
 
+use Services\Twilio\ListResource;
+
 /**
  * A list of :class:`Media <Services_Twilio_Rest_MediaInstance>` objects.
  * For the definitive reference, see the `Twilio Media List Documentation
  * <https://www.twilio.com/docs/api/rest/media>`_.
  */
-class Media extends Twilio\ListResource {
+class Media extends ListResource {
 
 
     // This is overridden because the list key in the Twilio response
@@ -25,7 +27,7 @@ class Media extends Twilio\ListResource {
     // constructor doesn't attempt to figure out it. It would do it
     // incorrectly because we override getResourceName above.
     public function __construct($client, $uri) {
-        $this->instance_name = "Services_Twilio_Rest_MediaInstance";
+        $this->instance_name = "Services\\Twilio\\Rest\\MediaInstance";
         parent::__construct($client, $uri);
     }
 

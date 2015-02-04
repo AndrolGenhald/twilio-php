@@ -13,11 +13,12 @@ function Twilio_autoload($className) {
         return false;
     }
     $file = str_replace('_', '/', $className);
+    $file = str_replace('\\', '/', $className);
     $file = str_replace('Services/', '', $file);
     return include dirname(__FILE__) . "/$file.php";
 }
 
-spl_autoload_register('Twilio_autoload');
+spl_autoload_register('Services\Twilio_autoload');
 
 /**
  * Create a client to talk to the Twilio API.
@@ -38,7 +39,7 @@ spl_autoload_register('Twilio_autoload');
  * .. code-block:: php
  *
  *      require('Services/Twilio.php');
- *      $client = new Services_Twilio('AC123', '456bef', null, null, 3);
+ *      $client = new Services\Twilio('AC123', '456bef', null, null, 3);
  *      // Take some action with the client, etc.
  */
 class Twilio extends Twilio\Resource

@@ -6,7 +6,7 @@ namespace Services\Twilio;
  * Twilio Capability Token generator
  *
  * @category Services
- * @package  Services_Twilio
+ * @package  Services\Twilio
  * @author Jeff Lindsay <jeff.lindsay@twilio.com>
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  */

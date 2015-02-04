@@ -2,11 +2,13 @@
 
 require_once 'Twilio/RequestValidator.php';
 
+use Services\Twilio\RequestValidator;
+
 class RequestValidatorTest extends PHPUnit_Framework_TestCase {
     
     function testRequestValidation() {
         $token = "1c892n40nd03kdnc0112slzkl3091j20";
-        $validator = new Services_Twilio_RequestValidator($token);
+        $validator = new RequestValidator($token);
 
         $uri = "http://www.postbin.org/1ed898x";
         $params = array(

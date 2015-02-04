@@ -7,7 +7,7 @@ use Services\Twilio;
 class Feedback extends Twilio\InstanceResource {
 
     public function __construct($client, $uri, $params = array()) {
-        $this->instance_name = "Services_Twilio_Rest_Feedback";
+        $this->instance_name = "Services\\Twilio\\Rest\\Feedback";
         return parent::__construct($client, $uri, $params);
     }
 

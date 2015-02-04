@@ -4,6 +4,8 @@ use \Mockery as m;
 
 require_once 'Twilio/Twiml.php';
 
+use Services\Twilio\Twiml;
+
 class TwimlTest extends PHPUnit_Framework_TestCase {
 
     function tearDown() {
@@ -11,28 +13,28 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     function testEmptyResponse() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $expected = '<Response></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r,
             "Should be an empty response");
     }
     
     public function testSayBasic() {   
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->say("Hello Monkey");
         $expected = '<Response><Say>Hello Monkey</Say></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testSayLoopThree() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->say("Hello Monkey", array("loop" => 3));
         $expected = '<Response><Say loop="3">Hello Monkey</Say></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testSayLoopThreeWoman() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->say("Hello Monkey", array("loop" => 3, "voice"=>"woman"));
         $expected = '<Response><Say loop="3" voice="woman">'
             . 'Hello Monkey</Say></Response>';
@@ -40,7 +42,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testSayConvienceMethod() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->say("Hello Monkey", array("language" => "fr"));
         $expected = '<Response><Say language="fr">'
             . 'Hello Monkey</Say></Response>';
@@ -48,7 +50,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testSayUTF8() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->say("é tü & må");
         $expected = '<Response><Say>'
             . '&#xE9; t&#xFC; &amp; m&#xE5;</Say></Response>';
@@ -56,7 +58,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testSayNamedEntities() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->say("&eacute; t&uuml; &amp; m&aring;");
         $expected = '<Response><Say>'
             . '&#xE9; t&#xFC; &amp; m&#xE5;</Say></Response>';
@@ -64,7 +66,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testSayNumericEntities() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->say("&#xE9; t&#xFC; &amp; m&#xE5;");
         $expected = '<Response><Say>'
             . '&#xE9; t&#xFC; &amp; m&#xE5;</Say></Response>';
@@ -72,14 +74,14 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testPlayBasic() {   
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->play("hello-monkey.mp3");
         $expected = '<Response><Play>hello-monkey.mp3</Play></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testPlayLoopThree() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->play("hello-monkey.mp3", array("loop" => 3));
         $expected = '<Response><Play loop="3">'
             . 'hello-monkey.mp3</Play></Response>';
@@ -87,7 +89,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testPlayConvienceMethod() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->play("hello-monkey.mp3", array("loop" => 3));
         $expected = '<Response><Play loop="3">'
             . 'hello-monkey.mp3</Play></Response>';
@@ -96,14 +98,14 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
 
     //Test Record Verb
     public function testRecord() {   
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->record();
         $expected = '<Response><Record></Record></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testRecordActionMethod() {   
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->record(array("action" => "example.com", "method" => "GET"));
         $expected = '<Response><Record action="example.com" '
             . 'method="GET"></Record></Response>';
@@ -111,7 +113,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testBooleanBecomesString() {   
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->record(array("transcribe" => true));
         $expected = '<Response><Record transcribe="true" '
             . '></Record></Response>';
@@ -119,7 +121,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testRecordMaxLengthKeyTimeout(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->record(array("timeout" => 4, "finishOnKey" => "#", 
             "maxLength" => 30));
         $expected = '<Response><Record timeout="4" finishOnKey="#" '
@@ -128,7 +130,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testRecordConvienceMethod(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->record(array("transcribeCallback" => "example.com"));
         $expected = '<Response><Record '
             . 'transcribeCallback="example.com"></Record></Response>';
@@ -136,7 +138,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testRecordAddAttribute(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->record(array("foo" => "bar"));
         $expected = '<Response><Record foo="bar"></Record></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
@@ -144,14 +146,14 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     
     //Test Redirect Verb
     public function testRedirect() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->redirect();
         $expected = '<Response><Redirect></Redirect></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
 
     public function testAmpersandEscaping() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $test_amp = "test&two&amp;three";
         $r->redirect($test_amp);
         $expected = '<Response><Redirect>' .
@@ -160,13 +162,13 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testRedirectConvience() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->redirect();
         $expected = '<Response><Redirect></Redirect></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     public function testRedirectAddAttribute(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->redirect(array("foo" => "bar"));
         $expected = '<Response><Redirect foo="bar"></Redirect></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
@@ -174,21 +176,21 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
 
     //Test Hangup Verb
     public function testHangup() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->hangup();
         $expected = '<Response><Hangup></Hangup></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testHangupConvience() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->hangup();
         $expected = '<Response><Hangup></Hangup></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testHangupAddAttribute(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->hangup(array("foo" => "bar"));
         $expected = '<Response><Hangup foo="bar"></Hangup></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
@@ -196,21 +198,21 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     
     //Test Pause Verb
     public function testPause() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->pause();
         $expected = '<Response><Pause></Pause></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testPauseConvience() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->pause();
         $expected = '<Response><Pause></Pause></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testPauseAddAttribute(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->pause(array("foo" => "bar"));
         $expected = '<Response><Pause foo="bar"></Pause></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
@@ -218,21 +220,21 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     
     //Test Dial Verb
     public function testDial() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->dial("1231231234");
         $expected = '<Response><Dial>1231231234</Dial></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testDialConvience() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->dial();
         $expected = '<Response><Dial></Dial></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testDialAddNumber() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $d = $r->dial();
         $d->number("1231231234");
         $expected = '<Response><Dial><Number>'
@@ -241,7 +243,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testDialAddConference() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $d = $r->dial();
         $d->conference("MyRoom");
         $expected = '<Response><Dial><Conference>'
@@ -250,7 +252,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testDialAddConferenceConvience() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $d = $r->dial();
         $d->conference("MyRoom", array("startConferenceOnEnter" => "false"));
         $expected = '<Response><Dial><Conference startConferenceOnEnter='
@@ -259,7 +261,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testDialAddAttribute() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->dial(array("foo" => "bar"));
         $expected = '<Response><Dial foo="bar"></Dial></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
@@ -267,14 +269,14 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     
     //Test Gather Verb
     public function testGather() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->gather();
         $expected = '<Response><Gather></Gather></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testGatherMethodAction(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->gather(array("action"=>"example.com", "method"=>"GET"));
         $expected = '<Response><Gather action="example.com" '
             . 'method="GET"></Gather></Response>';
@@ -282,7 +284,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testGatherActionWithParams(){
-        $r = new Services_Twilio_Twiml(); 
+        $r = new Twiml(); 
         $r->gather(array("action" => "record.php?action=recordPageNow"
             . "&id=4&page=3")); 
         $expected = '<Response><Gather action="record.php?action='
@@ -291,7 +293,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testGatherNestedVerbs(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $g = $r->gather(array("action"=>"example.com", "method"=>"GET"));
         $g->say("Hello World");
         $g->play("helloworld.mp3");
@@ -308,7 +310,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testGatherNestedVerbsConvienceMethods(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $g = $r->gather(array("action"=>"example.com", "method"=>"GET"));
         $g->say("Hello World");
         $g->play("helloworld.mp3");
@@ -325,35 +327,35 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testGatherAddAttribute(){
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->gather(array("foo" => "bar"));
         $expected = '<Response><Gather foo="bar"></Gather></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testSms() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->sms("Hello World");
         $expected = '<Response><Sms>Hello World</Sms></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testSmsConvience() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->sms("Hello World");
         $expected = '<Response><Sms>Hello World</Sms></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testSmsAddAttribute() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->sms(array("foo" => "bar"));
         $expected = '<Response><Sms foo="bar"></Sms></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
     }
     
     public function testReject() {
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->reject();
         $expected = '<Response><Reject></Reject></Response>';
         $this->assertXmlStringEqualsXmlString($expected, $r);
@@ -361,7 +363,7 @@ class TwimlTest extends PHPUnit_Framework_TestCase {
 
     function testGeneration() {
 
-        $r = new Services_Twilio_Twiml();
+        $r = new Twiml();
         $r->say('hello');
         $r->dial()->number('123', array('sendDigits' => '456'));
         $r->gather(array('timeout' => 15));

@@ -28,7 +28,7 @@ abstract class ListResource extends Resource
          * overridden by child classes if the rule doesn't work.
          */
         if (!isset($this->instance_name)) {
-            $this->instance_name = "Services_Twilio_Rest_" . rtrim($name, 's');
+            $this->instance_name = "Services\\Twilio\\Rest\\" . rtrim($name, 's');
         }
 
         parent::__construct($client, $uri);
@@ -137,7 +137,7 @@ abstract class ListResource extends Resource
         } else {
             $next_page_uri = null;
         }
-        return new Twilio\Page($page, $list_name, $next_page_uri);
+        return new Page($page, $list_name, $next_page_uri);
     }
 
     /**

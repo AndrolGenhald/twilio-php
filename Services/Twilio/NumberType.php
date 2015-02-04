@@ -5,7 +5,7 @@ namespace Services\Twilio;
 class NumberType extends ListResource
 {
     public function getResourceName($camelized = false) {
-        $this->instance_name = 'Services_Twilio_Rest_IncomingPhoneNumber';
+        $this->instance_name = 'Services\\Twilio\\Rest\\IncomingPhoneNumber';
         return $camelized ? 'IncomingPhoneNumbers' : 'incoming_phone_numbers';
     }
 

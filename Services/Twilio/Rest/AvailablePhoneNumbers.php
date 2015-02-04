@@ -52,7 +52,7 @@ class AvailablePhoneNumbers
 
     public function getResourceName($camelized = false) {
         // You can't page through the list of available phone numbers.
-        $this->instance_name = 'AvailablePhoneNumber'; //TODO Namespaces - make sure this works
+        $this->instance_name = 'Services\\Twilio\\Rest\\AvailablePhoneNumber';
         return $camelized ? 'Countries' : 'countries';
     }
 }

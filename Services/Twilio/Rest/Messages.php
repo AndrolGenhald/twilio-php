@@ -2,7 +2,9 @@
 
 namespace Services\Twilio\Rest;
 
-class Messages extends Twilio\ListResource {
+use Services\Twilio\ListResource;
+
+class Messages extends ListResource {
 
     /**
      * Create a new Message instance
